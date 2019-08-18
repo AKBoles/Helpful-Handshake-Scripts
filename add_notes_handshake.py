@@ -11,11 +11,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-handshake_username = "andrew_boles@baylor.edu" #input("Enter username: ")
-handshake_password = "#Remington009" #input("Enter password: ")
-# url will change based upon need, below looks at active student profile completions
-handshake_manage_student_url = "https://baylor.joinhandshake.com/students"
-chrome_driver = "C:\\Users\\andrew_boles\\AppData\\Local\\ChromeDriver\\chromedriver.exe"
+handshake_username = input("Enter username: ")
+handshake_password = input("Enter password: ")
+handshake_manage_student_url = "https://baylor.joinhandshake.com/students" # change url according to school
+chrome_driver = "C:\\Users\\andrew_boles\\AppData\\Local\\ChromeDriver\\chromedriver.exe" # change according to chromedriver path
 
 desired_note = "Write note here."
 student_email_list = []
@@ -39,7 +38,7 @@ beginning_time = time.time()
 driver = webdriver.Chrome(chrome_driver)
 driver.implicitly_wait(10) # causes everything to wait 10 seconds (max) for each call to driver
 login(driver, handshake_manage_student_url, handshake_username, handshake_password)
-# after logging in, loop through each email address and add correct note to student
+# after logging in, loop through each email address and add note to student
 for s in student_email_list:
     driver.find_element_by_xpath('//*[@id="react-select-2--value"]/div[1]').click()
     driver.find_element_by_xpath('//*[@id="global-search"]').send_keys(get_student_name(s)[0] + " " + get_student_name(s)[1])
